@@ -11,8 +11,8 @@ public class Player {
         this.playerControls = playerControls;
     }
 
-    float x = 0;
-    float y = 0;
+    public float x = 0;
+    public float y = 0;
 
     public void update(float delta) {
         float speed = 400f;

@@ -34,7 +34,7 @@ public class Main extends ApplicationAdapter {
 
     private void update() {
         float delta = Gdx.graphics.getDeltaTime();
-        ball.update(delta);
+        ball.update(delta, player1, player2);
         player1.update(delta);
         player2.update(delta);
     }
