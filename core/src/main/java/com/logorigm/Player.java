@@ -15,7 +15,7 @@ public class Player {
     public float y = 0;
 
     public void update(float delta) {
-        float speed = 800f;
+        float speed = 1000f;
         if (Gdx.input.isKeyPressed(playerControls.up)) {
             if(y<Constants.SCR_HEIGHT-128) {
                 y += speed * delta;

@@ -19,7 +19,12 @@ public class Ball {
         }
         if((y <= player1.y + 128 && y >= player1.y && x<16) ||(y >= player2.y && y <= player2.y+128 && x> Constants.SCR_WIDTH-16)){
             xspeed *= -1;
-            x++;
+            if((y <= player1.y + 128 && y >= player1.y && x<16)) {
+                x++;
+            }
+            else{
+                x--;
+            }
         }
         else if(x <= 2 || x >= Constants.SCR_WIDTH-2){
             if(x <= 2){
@@ -28,22 +33,60 @@ public class Ball {
             else if(x >= Constants.SCR_WIDTH-2){
                 score1++;
             }
-            x = (float) Constants.SCR_WIDTH /2;
-            y = (float) Constants.SCR_HEIGHT /2;
-            float ran = random.nextFloat(2);
-            xspeed = 300f * (ran-1);
+            brand();
         }
         x += xspeed * delta;
         y += yspeed * delta;
+        speedup(delta);
+    }
+    public void draw(ShapeRenderer shapeRenderer) {
+        shapeRenderer.circle(x, y, 16);
+    }
+    // Запуск шарика по рандомному направлению
+    private void brand(){
+        x = (float) Constants.SCR_WIDTH /2;
+        y = (float) Constants.SCR_HEIGHT /2;
+        float ran1 = random.nextFloat(2);
+        float ran2 = random.nextFloat(2);
+        if(ran1 < 1.25 && ran1>=1){
+            ran1 += 0.5f;
+        }
+        if(ran2 < 1.25 && ran2>=1){
+            ran2 += 0.5f;
+        }
+        if(ran1 < 1 && ran1 >= 0.75){
+            ran1 -= 0.5f;
+        }
+        if(ran1 < 1 && ran1 >= 0.75){
+            ran1 -= 0.5f;
+        }
+        xspeed = 300f * (ran1 - 1);
+        yspeed = 300f * (ran2 - 1);
+        if(yspeed < 0){
+            yspeed -= 100f;
+        }
+        else if(yspeed > 0){
+            yspeed += 100f;
+        }
+        if(xspeed < 0){
+            xspeed -= 100f;
+        }
+        else if(xspeed > 0){
+            xspeed += 100f;
+        }
+    }
+    private void speedup(float delta){
         if(xspeed<0) {
             xspeed-= 100*delta;
         }
         else{
             xspeed+= 100*delta;
         }
-    }
-
-    public void draw(ShapeRenderer shapeRenderer) {
-        shapeRenderer.circle(x, y, 16);
+        if(yspeed<0) {
+            yspeed-= 25*delta;
+        }
+        else{
+            yspeed+= 25*delta;
+        }
     }
 }
