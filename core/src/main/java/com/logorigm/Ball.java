@@ -12,16 +12,22 @@ public class Ball {
     public int score1 = 0;
     public int score2 = 0;
     public void update(float delta, Player player1, Player player2) {
-        if(y >= Constants.SCR_HEIGHT-1 || y <= 1){
+        if(y >= Constants.SCR_HEIGHT-1 || y <= 1) {
             yspeed *= -1;
         }
-        if((y <= player1.y + 128 && y >= player1.y && x<16) ||(y >= player2.y && y <= player2.y+128 && x> Constants.SCR_WIDTH-16)){
-            xspeed *= -1;
-            if((y <= player1.y + 128 && y >= player1.y && x<16)) {
-                x++;
+        if(y >= Constants.SCR_HEIGHT-1){
+            y -= 5;
+        }
+        else if(y <= 1){
+            y += 5;
+        }
+        if((y <= player1.y + 128 && y >= player1.y && x<16) || (y >= player2.y && y <= player2.y+128 && x> Constants.SCR_WIDTH-16)){
+            xspeed *=-1;
+            if(y <= player1.y + 128 && y >= player1.y && x<16){
+                yspeed += player1.pos * 400f;
             }
-            else{
-                x--;
+            else if(y >= player2.y && y <= player2.y+128 && x > Constants.SCR_WIDTH-16){
+                yspeed += player2.pos * 400f;
             }
         }
         else if(x <= 2 || x >= Constants.SCR_WIDTH-2){

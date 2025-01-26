@@ -12,18 +12,27 @@ public class Player {
 
     public float x = 0;
     public float y = 0;
+    public float pos = 0;
 
     public void update(float delta) {
         float speed = 1000f;
         if (Gdx.input.isKeyPressed(playerControls.up)) {
             if(y<Constants.SCR_HEIGHT-128) {
                 y += speed * delta;
+                pos = 1;
             }
+        }
+        else{
+            pos = 0;
         }
         if (Gdx.input.isKeyPressed(playerControls.down)) {
             if(y>0) {
                 y -= speed * delta;
+                pos = -1;
             }
+        }
+        else{
+            pos = 0;
         }
     }
 

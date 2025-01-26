@@ -1,7 +1,5 @@
 package com.logorigm;
 
-import static javax.swing.plaf.basic.BasicGraphicsUtils.drawString;
-
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -9,10 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ScreenUtils;
-
-import java.util.Random;
 
 /**
  * {@link ApplicationListener} implementation shared by all platforms.
@@ -21,9 +16,10 @@ public class Main extends ApplicationAdapter {
     private ShapeRenderer shapeRenderer;
     private SpriteBatch spriteBatch;
 
+
+    Ball ball = new Ball();
     Player player1 = new Player(PlayerControls.p1);
     Player player2 = new Player(PlayerControls.p2);
-    Ball ball = new Ball();
     private BitmapFont font;
     @Override
     public void create() {
@@ -41,8 +37,8 @@ public class Main extends ApplicationAdapter {
 
 
         spriteBatch.begin();
-        font.setColor(Color.CORAL);
-        font.draw(spriteBatch, "Score " + ball.score1 +  " : " + ball.score2 , 30, 30);
+        font.setColor(Color.WHITE);
+        font.draw(spriteBatch, "Score " + ball.score1 +  " : " + ball.score2 , Constants.SCR_WIDTH/2f-65, Constants.SCR_HEIGHT/2f+20);
         spriteBatch.end();
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
