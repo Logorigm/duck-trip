@@ -1,10 +1,8 @@
 package com.logorigm;
 
 import static com.badlogic.gdx.math.MathUtils.random;
-import static java.lang.Math.abs;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.sun.tools.javac.Main;
 
 public class Ball {
     float x = (float) Constants.SCR_WIDTH /2;
