@@ -9,6 +9,7 @@ public class Ball {
     float y = (float) Constants.SCR_HEIGHT /2;
     float xspeed = 300f;
     float yspeed = 300f;
+    public int vtime = 0;
     public int score1 = 0;
     public int score2 = 0;
     public void update(float delta, Player player1, Player player2) {
@@ -29,6 +30,7 @@ public class Ball {
             else if(y >= player2.y && y <= player2.y+128 && x > Constants.SCR_WIDTH-16){
                 yspeed += player2.pos * 400f;
             }
+            vtime += 20;
         }
         else if(x <= 2 || x >= Constants.SCR_WIDTH-2){
             if(x <= 2){
