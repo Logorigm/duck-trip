@@ -61,7 +61,7 @@ public class Main extends ApplicationAdapter {
         ball.update(delta, player1, player2);
         player1.update(delta);
         player2.update(delta);
-        vibro();
+        vibro(delta);
     }
     @Override
     public void dispose() {
@@ -77,17 +77,17 @@ public class Main extends ApplicationAdapter {
             spriteBatch.end();
         }
     }
-    private void vibro() {
+    private void vibro(float delta) {
         // TODO: длительность сейчас зависит от FPS, надо опираться на deltaTime
         if(ball.vtime > 0){
-            if((ball.vtime / 4)%2==0) {
+            if((int)(ball.vtime * 15f)%2==0) {
                 shapeRenderer.translate(Constants.power * x_rand, Constants.power*y_rand, 0);
             }
             else{
                 x_rand = random.nextFloat(1f)+0.1f;
                 y_rand = random.nextFloat(1f)+0.1f;
             }
-            ball.vtime--;
+            ball.vtime-= delta;
         }
     }
 }
