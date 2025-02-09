@@ -1,5 +1,7 @@
 package com.logorigm;
 
+import static com.badlogic.gdx.math.MathUtils.random;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -20,8 +22,9 @@ public class Main extends ApplicationAdapter {
     Ball ball = new Ball();
     Player player1 = new Player(PlayerControls.p1);
     Player player2 = new Player(PlayerControls.p2);
+    float x_rand = random.nextFloat(0.9f)+0.1f;
+    float y_rand = random.nextFloat(0.9f)+0.1f;
     private BitmapFont font;
-    private int kol = 0;
     @Override
     public void create() {
         shapeRenderer = new ShapeRenderer();
@@ -32,6 +35,7 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void render() {
+        shapeRenderer.identity();
         update();
 
         ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
@@ -42,6 +46,7 @@ public class Main extends ApplicationAdapter {
         font.setColor(Color.WHITE);
         font.draw(spriteBatch, "Score " + ball.score1 +  " : " + ball.score2 , Constants.SCR_WIDTH/2f-65, Constants.SCR_HEIGHT/2f+20);
         spriteBatch.end();
+
         vibro_rend();
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -67,32 +72,22 @@ public class Main extends ApplicationAdapter {
             spriteBatch.begin();
             font.getData().setScale(5f);
             font.setColor(Color.RED);
-            font.draw(spriteBatch, "Boom!", Constants.SCR_WIDTH / 2f-100, Constants.SCR_HEIGHT-80);
-            font.draw(spriteBatch, "Boom!", Constants.SCR_WIDTH / 2f-100, Constants.SCR_HEIGHT/ 2f -80);
+            font.draw(spriteBatch, Constants.hit, Constants.SCR_WIDTH / 2f - 100, Constants.SCR_HEIGHT - 80);
+            font.draw(spriteBatch, Constants.hit, Constants.SCR_WIDTH / 2f - 100, Constants.SCR_HEIGHT/ 2f - 80);
             spriteBatch.end();
         }
     }
     private void vibro() {
+        // TODO: длительность сейчас зависит от FPS, надо опираться на deltaTime
         if(ball.vtime > 0){
-            if(ball.vtime%2==0) {
-                shapeRenderer.translate(Constants.power, Constants.power, 0);
-                kol+=Constants.power;
+            if((ball.vtime / 4)%2==0) {
+                shapeRenderer.translate(Constants.power * x_rand, Constants.power*y_rand, 0);
             }
             else{
-                shapeRenderer.translate(-Constants.power, -Constants.power, 0);
-                kol-=Constants.power;
+                x_rand = random.nextFloat(1f)+0.1f;
+                y_rand = random.nextFloat(1f)+0.1f;
             }
             ball.vtime--;
-        }
-        if(ball.vtime == 0 && kol!=0){
-            if(kol<0){
-                shapeRenderer.translate(Constants.power, Constants.power, 0);
-                kol+=Constants.power;
-            }
-            else{
-                shapeRenderer.translate(-Constants.power, -Constants.power, 0);
-                kol-=Constants.power;
-            }
         }
     }
 }

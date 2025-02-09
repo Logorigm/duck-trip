@@ -25,12 +25,12 @@ public class Ball {
         if((y <= player1.y + 128 && y >= player1.y && x<16) || (y >= player2.y && y <= player2.y+128 && x> Constants.SCR_WIDTH-16)){
             xspeed *=-1;
             if(y <= player1.y + 128 && y >= player1.y && x<16){
-                yspeed += player1.pos * 400f;
+                yspeed += player1.pos * 200f;
             }
             else if(y >= player2.y && y <= player2.y+128 && x > Constants.SCR_WIDTH-16){
-                yspeed += player2.pos * 400f;
+                yspeed += player2.pos * 200f;
             }
-            vtime += 20;
+            vtime = 20;
         }
         else if(x <= 2 || x >= Constants.SCR_WIDTH-2){
             if(x <= 2){
