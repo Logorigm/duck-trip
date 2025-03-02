@@ -5,6 +5,7 @@ import static com.badlogic.gdx.math.MathUtils.random;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,7 +18,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 public class Main extends ApplicationAdapter {
     private ShapeRenderer shapeRenderer;
     private SpriteBatch spriteBatch;
-
+    Music music;
 
     Ball ball = new Ball();
     Player player1 = new Player(PlayerControls.p1);
@@ -31,6 +32,8 @@ public class Main extends ApplicationAdapter {
         spriteBatch = new SpriteBatch();
         font = new BitmapFont();
         font.getData().setScale(1.5f);
+        music = Gdx.audio.newMusic(Gdx.files.internal("hitmusic.mp3"));
+        music.setVolume(.5f);
     }
 
     @Override
@@ -82,6 +85,7 @@ public class Main extends ApplicationAdapter {
         if(ball.vtime > 0){
             if((int)(ball.vtime * 15f)%2==0) {
                 shapeRenderer.translate(Constants.power * x_rand, Constants.power*y_rand, 0);
+                music.play();
             }
             else{
                 x_rand = random.nextFloat(1f)+0.1f;
